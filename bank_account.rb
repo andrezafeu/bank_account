@@ -27,13 +27,25 @@ class BankAccount
     return balance
   end
 
+  def print_register
+    puts "-" * 40
+    puts "#{name}'s bank account:"
+    puts "-" * 40
+
+    puts "Description".ljust(30) + "Amount".rjust(10)
+    @transactions.each do |transaction|
+      puts transaction[:description].ljust(30) + sprintf("%0.2f", transaction[:amount]).rjust(10)
+    end
+
+    puts "-" * 40
+    puts "Balance:".ljust(30) + "#{sprintf("%0.2f", balance)}".rjust(10)
+    puts "-" * 40
+  end
+
 end
   
 bank_account = BankAccount.new("Andreza")
 bank_account.credit("paycheck", 100)
-puts bank_account.inspect
 bank_account.debit("groceries", 20)
 puts bank_account.inspect
-
-# puts floating point number to two decimals
-puts sprintf("%0.2f", bank_account.balance)
+bank_account.print_register
